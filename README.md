@@ -14,6 +14,7 @@ This plugin extends the YOURLS API by adding a `list` action with advanced capab
 - Sorting by keyword, URL, title, timestamp, IP address, or clicks.
 - Pagination using offset and limit (per page).
 - Custom selection of fields to be returned in the API response.
+- Searching by keyword.
 - Total count of links to assist with pagination.
 
 ## Features
@@ -21,6 +22,7 @@ This plugin extends the YOURLS API by adding a `list` action with advanced capab
 - **Sorting**: Sort results by any valid field (`keyword`, `url`, `title`, `timestamp`, `ip`, `clicks`).
 - **Pagination**: Use the `offset` and `perpage` parameters to paginate results.
 - **Field Selection**: Select specific fields to return (e.g., `keyword`, `url`, `clicks`). By default, all fields are returned.
+- **Search**: Search for links by keyword.
 - **Total Count**: Returns the total number of links in the database, useful for pagination.
 
 ## Installation
@@ -52,6 +54,7 @@ http://<your-yourls-site>/yourls-api.php
 - `sortorder`: Sort order, either `ASC` (ascending) or `DESC` (descending). Default is `DESC`.
 - `offset`: Number of links to skip (used for pagination). Default is `0`.
 - `perpage`: Number of links to return per page. Default is `50`.
+- `query`: Search query to filter results by keyword.
 - `fields[]`: An array of fields to return (e.g., `fields[]=keyword&fields[]=url`). Default is all fields (`*`).
 
 ### Example Request
@@ -92,6 +95,7 @@ This example retrieves the first 10 results, sorted by clicks in ascending order
 | `sortorder`| string | Sort order, `ASC` for ascending, `DESC` for descending.                      | `DESC`        |
 | `offset`   | int    | Offset for pagination, number of links to skip.                             | `0`           |
 | `perpage`  | int    | Number of links to return per page.                                          | `50`          |
+| `query`    | string | Search query to filter results by keyword.                                  |               |
 | `fields[]` | array  | Fields to return in the response. Use array format: `fields[]=keyword`.      | `*` (all)     |
 
 ## License

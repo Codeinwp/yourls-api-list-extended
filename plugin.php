@@ -26,6 +26,7 @@ function ti_list_function() {
 	$offset     = isset( $_REQUEST['offset'] ) && is_numeric( $_REQUEST['offset'] ) ? (int)$_REQUEST['offset'] : 0;
 	$perpage    = isset( $_REQUEST['perpage'] ) && is_numeric( $_REQUEST['perpage'] ) ? (int)$_REQUEST['perpage'] : 50;
 	$fields     = isset( $_REQUEST['fields'] ) && is_array( $_REQUEST['fields'] ) ? $_REQUEST['fields'] : [ '*' ];
+	$query      = isset( $_REQUEST['query'] ) ? $_REQUEST['query'] : '';
 
 	// Validate fields to ensure the query won't break if an invalid field is requested.
 	$valid_fields    = [ 'keyword', 'url', 'title', 'timestamp', 'ip', 'clicks' ];
@@ -34,7 +35,8 @@ function ti_list_function() {
 
 	// Get total number of links.
 	$total   = yourls_get_db()->fetchValue( "SELECT COUNT(*) FROM `$table`" );
-	$query   = "SELECT $selected_fields FROM `$table` ORDER BY `$sort_by` $sort_order LIMIT $offset, $perpage";
+	$where   = $query ? "WHERE `keyword` LIKE '%$query%'" : ''; // If you have millions of links, this query can be slow. You can replace LIKE with = if you want exact match.
+	$query   = "SELECT $selected_fields FROM `$table` $where ORDER BY `$sort_by` $sort_order LIMIT $offset, $perpage";
 	$results = yourls_get_db()->fetchObjects( $query );
 
 	// Return the response with results and total count.
