@@ -100,4 +100,4 @@ This example retrieves the first 10 results, sorted by clicks in ascending order
 
 ## License
 
-This plugin is released under the GPL-v3 License. See the [LICENSE](https://www.gnu.org/licenses/gpl-3.0.html) file for more details.
+This plugin is released under the MIT License.
